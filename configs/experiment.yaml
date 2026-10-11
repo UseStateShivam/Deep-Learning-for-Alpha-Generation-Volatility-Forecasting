@@ -1,0 +1,33 @@
+# Master Experiment Configuration
+experiment_id: "exp_001_deep_alpha_vol"
+description: "Cross-sectional alpha generation and volatility forecasting on 5m intraday bars"
+seed: 42
+
+data_config: "configs/data.yaml"
+features_config: "configs/features.yaml"
+labels_config: "configs/labels.yaml"
+validation_config: "configs/validation.yaml"
+models_config: "configs/models.yaml"
+portfolio_config: "configs/portfolio.yaml"
+
+active_models:
+  - "lightgbm"
+  - "tcn"
+  - "transformer"
+
+baselines:
+  - "zero_return"
+  - "historical_vol"
+
+artifacts:
+  output_dir: "artifacts"
+  reports_dir: "artifacts/reports"
+  figures_dir: "artifacts/figures"
+  metrics_dir: "artifacts/metrics"
+  manifests_dir: "artifacts/manifests"
+  checkpoints_dir: "checkpoints"
+
+evaluation:
+  bootstrap_samples: 500
+  bootstrap_block_size: 78    # 1 trading day blocks
+  confidence_level: 0.95

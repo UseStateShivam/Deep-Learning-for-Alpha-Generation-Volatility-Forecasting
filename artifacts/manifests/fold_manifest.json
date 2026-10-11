@@ -1,0 +1,56 @@
+{
+  "folds": [
+    {
+      "fold_id": "fold_01",
+      "train_start": "2024-01-02 14:35:00+00:00",
+      "train_end": "2024-01-29 15:20:00+00:00",
+      "val_start": "2024-01-29 15:40:00+00:00",
+      "val_end": "2024-02-07 16:45:00+00:00",
+      "initial_train_samples": 14950,
+      "purged_samples": 30,
+      "embargoed_samples": 0,
+      "final_train_samples": 14920,
+      "val_samples": 5600,
+      "seed": 42
+    },
+    {
+      "fold_id": "fold_02",
+      "train_start": "2024-01-02 14:35:00+00:00",
+      "train_end": "2024-02-07 16:30:00+00:00",
+      "val_start": "2024-02-07 16:50:00+00:00",
+      "val_end": "2024-02-16 17:55:00+00:00",
+      "initial_train_samples": 20550,
+      "purged_samples": 30,
+      "embargoed_samples": 0,
+      "final_train_samples": 20520,
+      "val_samples": 5600,
+      "seed": 42
+    },
+    {
+      "fold_id": "fold_03",
+      "train_start": "2024-01-02 14:35:00+00:00",
+      "train_end": "2024-02-16 17:40:00+00:00",
+      "val_start": "2024-02-16 18:00:00+00:00",
+      "val_end": "2024-02-27 19:05:00+00:00",
+      "initial_train_samples": 26150,
+      "purged_samples": 30,
+      "embargoed_samples": 0,
+      "final_train_samples": 26120,
+      "val_samples": 5600,
+      "seed": 42
+    },
+    {
+      "fold_id": "fold_04",
+      "train_start": "2024-01-02 14:35:00+00:00",
+      "train_end": "2024-02-27 18:50:00+00:00",
+      "val_start": "2024-02-27 19:10:00+00:00",
+      "val_end": "2024-03-07 20:30:00+00:00",
+      "initial_train_samples": 31750,
+      "purged_samples": 30,
+      "embargoed_samples": 0,
+      "final_train_samples": 31720,
+      "val_samples": 5630,
+      "seed": 42
+    }
+  ]
+}

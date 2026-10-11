@@ -1,0 +1,50 @@
+# Model Architectures and Hyperparameters
+tcn:
+  channel_sizes: [64, 64, 64]
+  kernel_size: 3
+  dropout: 0.2
+  return_head: "student_t"      # predicts location (mu), log_scale (sigma), df (nu)
+  volatility_head: "softplus"   # strictly positive output
+  min_df: 2.1                   # ensures finite variance for Student-t
+  max_df: 30.0
+
+transformer:
+  d_model: 64
+  nhead: 4
+  num_layers: 3
+  dim_feedforward: 128
+  dropout: 0.15
+  use_causal_mask: true
+  return_head: "student_t"
+  volatility_head: "softplus"
+  min_df: 2.1
+  max_df: 30.0
+
+lightgbm:
+  max_depth: 6
+  num_leaves: 31
+  learning_rate: 0.03
+  n_estimators: 200
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  early_stopping_rounds: 15
+  random_state: 42
+
+baselines:
+  return_baseline: "zero"
+  volatility_baseline: "rolling_realized"
+  rolling_vol_window: 12
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  max_epochs: 20
+  patience: 5
+  gradient_clip_norm: 1.0
+  device: "auto"   # "auto", "cuda", or "cpu"
+  loss_weights:
+    return_task: 1.0
+    volatility_task: 0.5

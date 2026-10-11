@@ -1,0 +1,49 @@
+# Feature Pipeline Configuration
+lookbacks:
+  return_lags: [1, 2, 3, 6, 12]
+  rolling_windows: [6, 12, 24, 48]
+  volatility_windows: [6, 12, 36]
+  ewm_span: 12
+
+price_features:
+  compute_log_returns: true
+  compute_multi_horizon_lags: true
+  compute_rolling_mean_deviation: true
+  compute_high_low_range: true
+  compute_open_close_return: true
+
+volatility_features:
+  compute_rolling_std: true
+  compute_ewm_volatility: true
+  compute_parkinson_volatility: true
+  compute_volatility_ratio: true
+
+volume_features:
+  compute_log_volume: true
+  compute_volume_zscore: true
+  compute_relative_volume: true
+  compute_price_volume_interaction: true
+
+momentum_features:
+  compute_short_momentum: true
+  compute_medium_momentum: true
+  compute_trend_consistency: true
+
+temporal_features:
+  compute_cyclical_time_of_day: true
+  compute_session_progress: true
+  compute_day_of_week: true
+  bars_per_session: 78
+
+cross_sectional_features:
+  enabled: true
+  rank_features: ["return_1", "momentum_12", "realized_vol_12"]
+
+normalization:
+  method: "standard"  # "standard" or "robust"
+  fit_on_train_only: true
+  clip_outliers: true
+  clip_sigma: 5.0
+
+sequence:
+  sequence_length: 24  # 24 five-minute bars = 2 hours of intraday history

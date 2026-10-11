@@ -1,0 +1,19 @@
+# Validation and Leakage-Prevention Configuration
+protocol:
+  method: "purged_walk_forward"  # "purged_walk_forward" or "purged_kfold"
+  holdout_test_ratio: 0.20        # Final 20% strictly isolated untouched holdout
+  num_walk_forward_folds: 4       # Number of chronological folds in dev period
+  train_window_type: "expanding"  # "expanding" or "rolling"
+  min_train_ratio: 0.40
+
+purging:
+  enabled: true
+  use_information_intervals: true
+
+embargo:
+  enabled: true
+  embargo_bars: 12                # 12 bars = 60 minutes embargo
+
+diagnostics:
+  save_manifest: true
+  manifest_path: "artifacts/manifests/fold_manifest.json"

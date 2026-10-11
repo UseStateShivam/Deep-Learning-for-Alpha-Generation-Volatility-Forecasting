@@ -1,0 +1,10 @@
+{
+  "experiment_id": "exp_001_deep_alpha_vol",
+  "model_name": "lightgbm",
+  "seed": 42,
+  "elapsed_seconds": 3.27,
+  "num_val_predictions": 22430,
+  "num_test_predictions": 9360,
+  "device": "cpu",
+  "torch_version": "2.14.1+cpu"
+}

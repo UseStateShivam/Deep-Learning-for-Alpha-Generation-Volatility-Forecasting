@@ -1,0 +1,18 @@
+# Target and Label Configuration
+returns:
+  horizon_bars: 3          # 3 five-minute bars = 15 minutes forward
+  reference_price: "close" # price at bar t close (execution simulated at t+1 open or next bar)
+  type: "log"              # log(P_{t+h} / P_t)
+  clip_outliers: true
+  clip_quantile: 0.001
+
+volatility:
+  horizon_bars: 3          # 3 forward bars
+  measure: "realized_vol"  # sqrt(sum_{i=1}^h r_{t+i}^2)
+  target_scale: "log"      # log(RV + eps) for neural training stability
+  epsilon: 1e-6
+
+alignment:
+  record_information_intervals: true
+  drop_forward_unobservable: true
+  prevent_cross_session_targets: false # intraday continuous or overnight gap handled

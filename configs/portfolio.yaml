@@ -1,0 +1,23 @@
+# Portfolio Construction and Backtesting Configuration
+portfolio:
+  num_quantiles: 10              # Deciles
+  min_universe_size: 10          # Require at least 10 assets for valid deciles
+  dollar_neutral: true           # Long weight = +0.5, Short weight = -0.5, Net = 0.0
+  gross_exposure: 1.0            # Sum of absolute weights = 1.0
+  max_weight_per_asset: 0.20     # Max single-asset allocation limit
+  rebalance_interval_bars: 3     # Rebalance every 3 bars (matching forward horizon)
+  signal_field: "pred_return_mean"
+  risk_parity_vol_field: "pred_volatility"
+  execution_delay_bars: 1        # Enforce realistic 1-bar execution delay (no lookahead execution)
+
+costs:
+  spread_bps: 2.0                # Half-spread cost in basis points
+  commission_bps: 1.0            # Broker fee in basis points
+  slippage_bps: 2.0              # Adverse price drift / market impact proxy
+  total_one_way_cost_bps: 5.0    # 5 bps per 100% turnover
+  short_borrow_fee_annual_pct: 1.5
+
+annualization:
+  trading_days_per_year: 252
+  bars_per_day: 78               # 6.5 hours of regular trading / 5 min
+  total_bars_per_year: 19656     # 252 * 78
