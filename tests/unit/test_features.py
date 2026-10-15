@@ -2,13 +2,12 @@
 Unit Tests for Technical, Temporal, and Cross-Sectional Feature Engineering.
 """
 
-import pytest
 import numpy as np
-import pandas as pd
+
+from alpha_volatility.features.cross_sectional import compute_cross_sectional_features
+from alpha_volatility.features.pipeline import FeaturePipeline
 from alpha_volatility.features.technical import compute_technical_features
 from alpha_volatility.features.temporal import compute_temporal_features
-from alpha_volatility.features.cross_sectional import compute_cross_sectional_features
-from alpha_volatility.features.pipeline import FeaturePipeline, CORE_FEATURE_COLUMNS
 
 
 def test_technical_log_returns(sample_market_bars):
@@ -59,7 +58,7 @@ def test_feature_pipeline_scaler_isolation(sample_market_bars):
 
     scaler = pipeline.fit_scaler(train_slice, pipeline.feature_columns, method="standard")
     scaled_train = pipeline.transform_features(train_slice, scaler, pipeline.feature_columns)
-    scaled_test = pipeline.transform_features(test_slice, scaler, pipeline.feature_columns)
+    pipeline.transform_features(test_slice, scaler, pipeline.feature_columns)
 
     # Scaled training mean should be ~0 and std ~1
     train_vals = scaled_train[pipeline.feature_columns].values

@@ -2,12 +2,12 @@
 Unit Tests for Target and Label Engineering.
 """
 
-import pytest
 import numpy as np
 import pandas as pd
+
+from alpha_volatility.labels.alignment import attach_label_information_intervals
 from alpha_volatility.labels.returns import compute_future_returns
 from alpha_volatility.labels.volatility import compute_future_realized_volatility
-from alpha_volatility.labels.alignment import attach_label_information_intervals, generate_all_labels
 
 
 def test_forward_return_calculation(sample_market_bars):

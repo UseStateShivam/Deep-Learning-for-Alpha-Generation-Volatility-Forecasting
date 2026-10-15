@@ -3,9 +3,9 @@ Pytest Fixtures for Quantitative Deep Learning Suite
 Provides small deterministic market bar datasets, features, and model fixtures.
 """
 
-import pytest
-import numpy as np
 import pandas as pd
+import pytest
+
 from alpha_volatility.data.synthetic import generate_synthetic_market_data
 from alpha_volatility.features.pipeline import FeaturePipeline
 from alpha_volatility.labels.alignment import generate_all_labels

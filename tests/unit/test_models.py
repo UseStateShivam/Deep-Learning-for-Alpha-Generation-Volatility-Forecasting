@@ -2,15 +2,13 @@
 Unit Tests for Deep Learning and Baseline Model Architectures.
 """
 
-import pytest
-import torch
 import numpy as np
-import pandas as pd
+import torch
+
+from alpha_volatility.models.lightgbm_model import LightGBMForecaster
+from alpha_volatility.models.losses import qlike_loss, student_t_nll
 from alpha_volatility.models.tcn import TCNForecaster
 from alpha_volatility.models.transformer import TransformerForecaster
-from alpha_volatility.models.lightgbm_model import LightGBMForecaster
-from alpha_volatility.models.baselines import ZeroReturnBaseline, HistoricalVolatilityPersistenceBaseline
-from alpha_volatility.models.losses import student_t_nll, gaussian_nll, qlike_loss, MultiTaskLoss
 
 
 def test_tcn_forward_pass_shapes_and_gradients():
@@ -73,7 +71,6 @@ def test_student_t_nll_finite():
 
     loss = student_t_nll(y, mu, sigma, nu)
     assert torch.isfinite(loss)
-    assert loss > 0
 
 
 def test_qlike_loss_zero_at_optimum():

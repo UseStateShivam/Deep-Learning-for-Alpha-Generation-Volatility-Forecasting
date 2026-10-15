@@ -3,14 +3,13 @@ Leakage and Lookahead Tests
 Strict tests proving the complete absence of future information leakage.
 """
 
-import pytest
 import numpy as np
 import pandas as pd
+
 from alpha_volatility.data.synthetic import generate_synthetic_market_data
 from alpha_volatility.features.pipeline import FeaturePipeline
-from alpha_volatility.validation.purging import purge_overlapping_samples
 from alpha_volatility.validation.embargo import apply_embargo
-from alpha_volatility.labels.alignment import generate_all_labels
+from alpha_volatility.validation.purging import purge_overlapping_samples
 
 
 def test_future_data_does_not_alter_past_features():

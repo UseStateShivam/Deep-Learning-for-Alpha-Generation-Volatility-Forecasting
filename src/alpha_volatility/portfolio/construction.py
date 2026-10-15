@@ -3,7 +3,7 @@ Portfolio Construction Module
 Constructs dollar-neutral long/short portfolios from decile signal ranking.
 """
 
-from typing import Dict
+from typing import Dict, Optional
 
 import numpy as np
 import pandas as pd
@@ -53,7 +53,7 @@ def construct_dollar_neutral_weights(
     df_timestamp: pd.DataFrame,
     quantile_col: str = "quantile",
     num_quantiles: int = 10,
-    max_weight_cap: float = 0.20,
+    max_weight_cap: Optional[float] = None,
 ) -> Dict[str, float]:
     """
     Constructs dollar-neutral portfolio weights at a single rebalance timestamp:
@@ -66,7 +66,7 @@ def construct_dollar_neutral_weights(
         df_timestamp: Slice of DataFrame for a single timestamp.
         quantile_col: Quantile bucket column.
         num_quantiles: Max quantile number (10 for deciles).
-        max_weight_cap: Position limit cap.
+        max_weight_cap: Optional position limit cap.
 
     Returns:
         Dictionary mapping asset_id to portfolio weight.
@@ -79,7 +79,7 @@ def construct_dollar_neutral_weights(
     if not long_assets or not short_assets:
         return weights
 
-    # Equal weight allocation
+    # Equal weight allocation: sum of longs = +0.5, sum of shorts = -0.5
     long_w = 0.5 / len(long_assets)
     short_w = -0.5 / len(short_assets)
 
@@ -88,9 +88,10 @@ def construct_dollar_neutral_weights(
     for a in short_assets:
         weights[str(a)] = short_w
 
-    # Apply position limits if needed
-    asset_keys = list(weights.keys())
-    w_arr = np.array([weights[k] for k in asset_keys])
-    w_capped = apply_position_limits(w_arr, max_weight_cap=max_weight_cap)
+    if max_weight_cap is not None and max_weight_cap < 1.0:
+        asset_keys = list(weights.keys())
+        w_arr = np.array([weights[k] for k in asset_keys])
+        w_capped = apply_position_limits(w_arr, max_weight_cap=max_weight_cap)
+        return {k: float(w) for k, w in zip(asset_keys, w_capped, strict=False)}
 
-    return {k: float(w) for k, w in zip(asset_keys, w_capped, strict=False)}
+    return weights

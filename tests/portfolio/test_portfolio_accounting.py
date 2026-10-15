@@ -3,9 +3,9 @@ Portfolio Accounting Tests
 Verifies dollar neutrality, turnover accounting, and friction deductions on hand-calculated toy datasets.
 """
 
-import pytest
 import numpy as np
 import pandas as pd
+
 from alpha_volatility.portfolio.backtest import DecilePortfolioBacktester
 from alpha_volatility.portfolio.costs import TransactionCostModel
 

@@ -2,13 +2,13 @@
 Unit Tests for Evaluation Metrics and Statistical Tests.
 """
 
-import pytest
 import numpy as np
 import pandas as pd
+
 from alpha_volatility.evaluation.forecasting import compute_forecasting_metrics
-from alpha_volatility.evaluation.information_coefficient import compute_cross_sectional_ic_series, summarize_ic_metrics
-from alpha_volatility.evaluation.portfolio_metrics import compute_portfolio_performance_metrics, compute_drawdown_series
-from alpha_volatility.evaluation.statistical_tests import stationary_block_bootstrap, diebold_mariano_test
+from alpha_volatility.evaluation.information_coefficient import compute_cross_sectional_ic_series
+from alpha_volatility.evaluation.portfolio_metrics import compute_drawdown_series
+from alpha_volatility.evaluation.statistical_tests import diebold_mariano_test
 
 
 def test_forecasting_metrics_mae_rmse():
@@ -53,9 +53,10 @@ def test_portfolio_drawdown_calculation():
 
 def test_diebold_mariano_superior_model():
     """Verifies DM test detects significant loss difference between superior and inferior models."""
+    rng = np.random.default_rng(42)
     n = 200
-    loss_inferior = np.ones(n) * 1.0
-    loss_superior = np.ones(n) * 0.1
+    loss_inferior = np.ones(n) * 1.0 + rng.normal(0, 0.1, size=n)
+    loss_superior = np.ones(n) * 0.1 + rng.normal(0, 0.1, size=n)
     stat, p_val = diebold_mariano_test(loss_inferior, loss_superior)
     assert stat > 5.0
     assert p_val < 0.01

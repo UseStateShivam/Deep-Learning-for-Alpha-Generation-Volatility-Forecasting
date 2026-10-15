@@ -3,17 +3,18 @@ Integration Tests
 Runs a small, deterministic end-to-end quantitative pipeline from data generation to reporting.
 """
 
-import pytest
-from pathlib import Path
 from alpha_volatility.data.synthetic import generate_synthetic_market_data
 from alpha_volatility.data.validation import validate_bars
+from alpha_volatility.evaluation.forecasting import compute_forecasting_metrics
+from alpha_volatility.evaluation.information_coefficient import (
+    compute_cross_sectional_ic_series,
+    summarize_ic_metrics,
+)
 from alpha_volatility.features.pipeline import FeaturePipeline
 from alpha_volatility.labels.alignment import generate_all_labels
-from alpha_volatility.validation.splits import PurgedWalkForwardCV
 from alpha_volatility.models.lightgbm_model import LightGBMForecaster
-from alpha_volatility.evaluation.forecasting import compute_forecasting_metrics
-from alpha_volatility.evaluation.information_coefficient import compute_cross_sectional_ic_series, summarize_ic_metrics
 from alpha_volatility.portfolio.backtest import DecilePortfolioBacktester
+from alpha_volatility.validation.splits import PurgedWalkForwardCV
 
 
 def test_end_to_end_pipeline():

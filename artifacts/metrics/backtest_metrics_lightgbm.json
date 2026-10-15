@@ -1,0 +1,18 @@
+{
+  "cumulative_return": -0.1898,
+  "annualized_return": -4.2967,
+  "annualized_volatility": 0.4972,
+  "sharpe_ratio": -8.6414,
+  "sortino_ratio": -8.5736,
+  "max_drawdown": 0.2879,
+  "calmar_ratio": -14.9232,
+  "win_rate": 0.4679,
+  "win_loss_ratio": 0.9719,
+  "total_bars": 936,
+  "mean_turnover": 0.2484,
+  "total_turnover": 232.5,
+  "total_cost_drag": 0.2325,
+  "sharpe_ratio_gross": 1.1868,
+  "cumulative_return_gross": 0.0223,
+  "monotonicity_score": 0.4667
+}
